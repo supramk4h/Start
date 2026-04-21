@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-accent: #D2042D;
+  --color-accent-active: #FF3131;
+  --color-bg: #000000;
+  --color-surface: #121212;
+  --color-border: #222222;
+  --color-text-primary: #f3f4f6;
+  --color-text-muted: #9ca3af;
+}
+
+@layer base {
+  body {
+    @apply font-sans bg-black text-text-primary leading-relaxed overflow-x-hidden min-h-screen relative;
+  }
+
+  /* Cinematic Film Grain Overlay - REMOVED FOR PERFORMANCE */
+}
+
+@keyframes grain {
+  0%, 100% { transform:translate(0, 0) }
+  10% { transform:translate(-5%, -10%) }
+  20% { transform:translate(-15%, 5%) }
+  30% { transform:translate(7%, -25%) }
+  40% { transform:translate(-5%, 25%) }
+  50% { transform:translate(-15%, 10%) }
+  60% { transform:translate(15%, 0%) }
+  70% { transform:translate(0%, 15%) }
+  80% { transform:translate(3%, 35%) }
+  90% { transform:translate(-10%, 10%) }
+}
+
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .transform-gpu {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+}
+
+.glow {
+  @apply pointer-events-none absolute w-[400px] h-[400px] bg-accent-active blur-[180px] opacity-10 -z-10 rounded-full;
+}
+
+@keyframes scroll {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(calc(-50% - 12px), 0, 0); }
+}
+
+.testimonials-track {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  animation: scroll 80s linear infinite;
+  will-change: transform;
+}
+
+.testimonials-track:hover {
+  animation-play-state: paused;
+}
